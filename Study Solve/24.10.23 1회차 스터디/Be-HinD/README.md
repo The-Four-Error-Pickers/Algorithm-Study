@@ -83,7 +83,7 @@ class Solution {
 ```
 
 ### 제출 결과
-
+![제출결과](./result.png)
 
 <br>
 
