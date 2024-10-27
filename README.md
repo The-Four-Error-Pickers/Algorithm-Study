@@ -1,7 +1,8 @@
 # 🔖 알고리즘 스터디
 
 <p> 전반적인 스터디 관리는 노션(Notion)을 활용했습니다. </p>
-<b>Notion Link</b> : https://purrfect-fridge-ab8.notion.site/127f11fed59180d185a9ecb4b4374ad4?pvs=4
+
+[Notion Link](https://purrfect-fridge-ab8.notion.site/127f11fed59180d185a9ecb4b4374ad4?pvs=4)
 
 <br>
 
