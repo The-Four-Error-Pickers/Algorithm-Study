@@ -3,6 +3,8 @@
 <br>
 <b> [문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/68646) </b>
 
+# 문제 출제 및 서기
+<b> 정현(Be-HinD) </b>
 
 # 20분 결과
 <p> 정현 : 접근 O </p>
