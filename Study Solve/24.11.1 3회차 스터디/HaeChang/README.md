@@ -1,4 +1,4 @@
-## [프로그래머스 Lv3. 풍선 터트리기](https://school.programmers.co.kr/learn/courses/30/lessons/68646)
+## [프로그래머스 Lv3. 최고의 집합](https://school.programmers.co.kr/learn/courses/30/lessons/12938)
 
 > 문제의 키워드
 
