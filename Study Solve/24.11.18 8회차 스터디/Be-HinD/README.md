@@ -29,50 +29,42 @@ import java.util.*;
 class Solution {
     public String[] solution(String[] s) {
         String[] answer = new String[s.length];
-        StringBuilder sb;
-
-        int index, cnt, insert;
-        char[] chars, arr = new char[1_000_001];
-        for(int t = 0; t < s.length; t++) {
-            index = cnt = insert = 0;
-            chars = s[t].toCharArray();
-
-            for(int i = 0; i < chars.length; i++) {
-                arr[index] = chars[i];
-                if(index > 1) {
-                    if(arr[index - 2] == '1' && arr[index-1] == '1' && arr[index] == '0') {
-                        cnt++;
-                        index -= 3;
-                    }
-                }
-                index++;
-            }
-
-
-            for(int i = index - 1; i >= 0; i--) {
-                if(arr[i] == '0') {
-                    insert = i + 1;
-                    break;
-                }
-            }
-
-            sb = new StringBuilder();
-            for(int i = 0; i < insert; i++) {
-                sb.append(arr[i]);
-            }
-            for(int i = 0; i < cnt; i++) {
-                sb.append("110");
-            }
-            for(int i = insert; i < index; i++) {
-                sb.append(arr[i]);
-            }
-
-            answer[t] = sb.toString();
-
+        
+        for(int i=0; i<s.length; i++){
+            String ans = solve(s[i]);   
+            answer[i] = ans;
         }
-
-
+        
         return answer;
+    }
+    
+    public String solve(String s){
+        StringBuilder sb = new StringBuilder();
+        StringBuilder ooz = new StringBuilder();
+        
+        for(int i=0; i<s.length(); i++){
+            Character c = s.charAt(i);
+            if(sb.length()>=2 && c=='0' && sb.charAt(sb.length()-2)=='1' && sb.charAt(sb.length()-1)=='1'){
+                ooz.append("110");
+                sb.delete(sb.length()-2, sb.length());
+            }
+            else{
+                sb.append(c);
+            }
+        }
+        
+        if(ooz.length()>0){
+            //0이 없으면
+            if(sb.indexOf("0")==-1){
+                sb.insert(0, ooz);
+            }
+            else{
+                int idx = sb.lastIndexOf("0");
+                sb.insert(idx+1, ooz);
+            }
+        }
+        
+        return sb.toString();
     }
 }
 ```
