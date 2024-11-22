@@ -8,8 +8,8 @@
 > 접근법
 - s의 길이 1,000,000 -> O(NlogN)이지만
 - 특수한 경우 O(N^2)도 가능
-- "110"의 경우, 두 개를 사용했을 때, "110110"이 가장 최적의 방법
-- 모든 "110"을 제거한 후 "110"보다 우선순위가 낮은 곳을 찾아 해당 위치에 모든 "110"을 삽입
+- 입력에서 뽑을 수 있는 모든 "110"을 추출
+- 남은 문자열에서 마지막 0의 위치를 탐색 후 뒤에 뽑았던 "110"의 개수만큼 삽입 후 return
 
 <br/>
 
@@ -25,47 +25,78 @@
 
 ```java
 import java.util.*;
-
 class Solution {
     public String[] solution(String[] s) {
-        String[] answer = new String[s.length];
         
-        for(int i=0; i<s.length; i++){
-            String ans = solve(s[i]);   
-            answer[i] = ans;
+        /**
+        x를 최대한 사전 순으로
+        x에 있는 "110"을 뽑아서
+        임의의 위치에 다시 삽입
+        접근법
+        110을 뽑을 수 있는대로 전부 추출
+        남은 x에서 뽑은 110들을 삽입할 위치 탐색
+        마지막 0의 위치 뒤에 삽입
+        **/
+        
+        String[] res = new String[s.length];
+        int p = 0;
+        for(String idx : s) {
+            res[p++] = process(idx);
         }
-        
-        return answer;
+        return res;
     }
     
-    public String solve(String s){
-        StringBuilder sb = new StringBuilder();
-        StringBuilder ooz = new StringBuilder();
-        
-        for(int i=0; i<s.length(); i++){
-            Character c = s.charAt(i);
-            if(sb.length()>=2 && c=='0' && sb.charAt(sb.length()-2)=='1' && sb.charAt(sb.length()-1)=='1'){
-                ooz.append("110");
-                sb.delete(sb.length()-2, sb.length());
-            }
-            else{
-                sb.append(c);
+    private static String process(String idx) {
+        String remainStr = extract110(idx);
+        int cnt110 = (idx.length() - remainStr.length()) / 3;
+        //삽입위치 탐색
+        int zeroIdx = 0;
+        for(int i=0; i<remainStr.length(); i++) {
+            if(remainStr.charAt(i) == '0') {
+                zeroIdx = i+1;
             }
         }
         
-        if(ooz.length()>0){
-            //0이 없으면
-            if(sb.indexOf("0")==-1){
-                sb.insert(0, ooz);
+        StringBuilder res = new StringBuilder();
+        for(int i=0; i<zeroIdx; i++) {
+            res.append(remainStr.charAt(i));
+        }
+        for(int i=0; i<cnt110; i++) {
+            res.append("110");
+        }
+        for(int i=zeroIdx; i<remainStr.length(); i++) {
+            res.append(remainStr.charAt(i));
+        }
+        return res.toString();
+    }
+    
+    private static String extract110(String idx) {
+        Stack<Character> st = new Stack<>();
+        
+        for(int i=0; i<idx.length(); i++) {
+            if(st.size() >= 2 && idx.charAt(i) == '0') {
+                char mid = st.pop();
+                char first = st.pop();
+                if(first == '1' && mid == '1' && idx.charAt(i) == '0') continue;
+                else {
+                    st.push(first);
+                    st.push(mid);
+                    st.push(idx.charAt(i));
+                }
             }
-            else{
-                int idx = sb.lastIndexOf("0");
-                sb.insert(idx+1, ooz);
+            else {
+                st.push(idx.charAt(i));
             }
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        for(char x : st) {
+            sb.append(x);
         }
         
         return sb.toString();
     }
+    
 }
 ```
 
@@ -76,6 +107,8 @@ class Solution {
 > 스터디 정리
 - 이번 문제를 통해 그리디는 내가 생각한게 틀리면 어쩔 수 없구나 라는 생각을 할 수 있었음.
 - 또한 모두가 풀지 못했던 문제로 다같이 토론함으로써 정답을 유추했던 문제로 재밌었음..
+- 추가로 이번 문제를 구현하면서 굉장히 복잡하게 코드를 작성하고 있다는 느낌을 받았음.
+- 생각한 것을 그대로 효율적으로 구현할 수 있는 실력 또한 중요하고, 리팩토링 과정을 통해서 클린코드 작성에 대해 학습할 예정
 
 
 > 구현 알고리즘
