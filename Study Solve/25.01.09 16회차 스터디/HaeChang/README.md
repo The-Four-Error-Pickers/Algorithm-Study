@@ -21,7 +21,7 @@
     - 그런 다음, 해당 숫자를 a 수열내에서 찾아서 만들수 있는 최대 집합의 개수를 찾는다.
         - 그럼 즉, 해당 숫자를 교집합 원소로 두고 있는 스타 수열의 길이를 구할 수 있다.
 
-- sol2: 길이에 집중했을 때 최대한 길게 스타수열을 만들 수 있어야 한다는것은, 곧바로 연속적인 a 배열내에 숫자 `a[i], a[i + 1]` 이거나, `a[i - X], a[i]` 이거나 `a[i + 1 - X], a[i + 1]` 쌍들로 만들 수 있음
+- sol2 (ChaNyeok 풀이 참조): 길이에 집중했을 때 최대한 길게 스타수열을 만들 수 있어야 한다는것은, 곧바로 연속적인 a 배열내에 숫자 `a[i], a[i + 1]` 이거나, `a[i - X], a[i]` 이거나 `a[i + 1 - X], a[i + 1]` 쌍들로 만들 수 있음
     - 여기서 `a[i]` 를 기준으로 i번째 원소까지의 최장 스타수열 길이가 계산이 가능하다.
     - 위의 sol1 풀이와는 다른점은 굳이 교집합 원소를 기준으로 모든 a 수열내에 계산을 곧바로 진행해야 하는가? 이다.
     - 어짜피 a 수열을 순회하면서 교집합용 기준원소가 몇번 등장하는지가 중요하고, 해당 교집합 기준 원소를 가지고 현재 인덱스까지 최장길이를 얼마나 만들 수 잇는지 체크하면 된다.
@@ -134,4 +134,6 @@ class Solution {
 
 #### 풀이 링크
 
-[Private Solve](https://github.com/The-Four-Error-Pickers/Algorithm-Study/tree/main/Private%20Solve/1832.%20%EB%B3%B4%ED%96%89%EC%9E%90%20%EC%B2%9C%EA%B5%AD/HaeChang/2025-1-2T2147)
+sol1: [Private Solve](https://github.com/The-Four-Error-Pickers/Algorithm-Study/blob/main/Private%20Solve/70130.%20%EC%8A%A4%ED%83%80%20%EC%88%98%EC%97%B4/HaeChang/2025-1-10T0451/Solution.java)
+
+sol2: [Private Solve](https://github.com/The-Four-Error-Pickers/Algorithm-Study/blob/main/Private%20Solve/70130.%20%EC%8A%A4%ED%83%80%20%EC%88%98%EC%97%B4/HaeChang/2025-1-10T14633/Solution.java)
