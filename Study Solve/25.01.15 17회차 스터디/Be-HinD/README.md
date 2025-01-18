@@ -52,33 +52,35 @@ class Solution {
 
     static int[] dx = {0, 0, 1, -1}; // 이동 방향 (상, 하, 좌, 우)
     static int[] dy = {1, -1, 0, 0};
-
+    
     static int bfs(int[][] map) {
         Queue<Robot> q = new ArrayDeque<>();
-        boolean[][][][] visited = new boolean[N][N][N][N];
+        boolean[][][] v = new boolean[N][N][2];
         // (x1,y1) + (x2,y2) + (수평/수직) -> head의 위치에 따라 별도 체크가 안됨.
 
         q.offer(new Robot(0, 0, 0, 1, 0));
-        visited[0][0][0][1] = true;
+        v[0][0][0] = true;
+        v[0][1][0] = true;
 
         while (!q.isEmpty()) {
             Robot cur = q.poll();
-
+            
             // 목표 지점 도달
             if ((cur.x1 == N - 1 && cur.y1 == N - 1) || (cur.x2 == N - 1 && cur.y2 == N - 1)) {
                 return cur.cnt;
             }
 
             // Step 1. 사방탐색
+            int dist = cur.x1 == cur.x2 ? 0 : 1;
             for (int i = 0; i < 4; i++) {
                 int nx1 = cur.x1 + dx[i];
                 int ny1 = cur.y1 + dy[i];
                 int nx2 = cur.x2 + dx[i];
                 int ny2 = cur.y2 + dy[i];
 
-                if (isValid(nx1, ny1, nx2, ny2, map) || visited[nx1][ny1][nx2][ny2]) continue;
-                visited[nx1][ny1][nx2][ny2] = true;
-                visited[nx2][ny2][nx1][ny1] = true;
+                if (isValid(nx1, ny1, nx2, ny2, map) || (v[nx1][ny1][dist] && v[nx2][ny2][dist])) continue;
+                v[nx1][ny1][dist] = true;
+                v[nx2][ny2][dist] = true;
                 q.offer(new Robot(nx1, ny1, nx2, ny2, cur.cnt + 1));
                 
             }
@@ -87,32 +89,35 @@ class Solution {
             if (cur.x1 == cur.x2) { // 수평
                 for (int d = -1; d <= 1; d += 2) { //-1, 1
                     if (isValid(cur.x1 + d, cur.y1, cur.x2 + d, cur.y2, map)) continue;
-                    if (visited[cur.x1][cur.y1][cur.x1 + d][cur.y1]) continue; //head 고정
+                    if(!v[cur.x1][cur.y1][1] || !v[cur.x1+d][cur.y1][1]) {    //둘 중 하나를 방문하지 않았다면 처음 가는 곳
+                        v[cur.x1][cur.y1][1] = true;
+                        v[cur.x1+d][cur.y1][1] = true;
+                        q.offer(new Robot(cur.x1, cur.y1, cur.x1 + d, cur.y1, cur.cnt + 1));
+                    }
                     
-                    visited[cur.x1][cur.y1][cur.x1 + d][cur.y1] = true;
-                    visited[cur.x1 + d][cur.y1][cur.x1][cur.y1] = true;
-                    q.offer(new Robot(cur.x1, cur.y1, cur.x1 + d, cur.y1, cur.cnt + 1));
+                    if(!v[cur.x2][cur.y2][1] || !v[cur.x2+d][cur.y2][1]) {
+                        v[cur.x2][cur.y2][1] = true;
+                        v[cur.x2+d][cur.y2][1] = true;
+                        q.offer(new Robot(cur.x2, cur.y2, cur.x2 + d, cur.y2, cur.cnt + 1));
+                    }
                     
-                    if (visited[cur.x2][cur.y2][cur.x2 + d][cur.y2]) continue; //tail 고정
-                    
-                    visited[cur.x2][cur.y2][cur.x2 + d][cur.y2] = true;
-                    visited[cur.x2 + d][cur.y2][cur.x2][cur.y2] = true;
-                    q.offer(new Robot(cur.x2, cur.y2, cur.x2 + d, cur.y2, cur.cnt + 1));
                 }
             } else { // 수직
                 for (int d = -1; d <= 1; d += 2) {
                     if (isValid(cur.x1, cur.y1 + d, cur.x2, cur.y2 + d, map)) continue;
-                    if (visited[cur.x1][cur.y1][cur.x1][cur.y1 + d]) continue;
                     
-                    visited[cur.x1][cur.y1][cur.x1][cur.y1 + d] = true;
-                    visited[cur.x1][cur.y1 + d][cur.x1][cur.y1] = true;
-                    q.offer(new Robot(cur.x1, cur.y1, cur.x1, cur.y1 + d, cur.cnt + 1));
+                    if(!v[cur.x1][cur.y1][0] || !v[cur.x1][cur.y1+d][0]) {
+                        v[cur.x1][cur.y1][0] = true;
+                        v[cur.x1][cur.y1+d][0] = true;
+                        q.offer(new Robot(cur.x1, cur.y1, cur.x1, cur.y1 + d, cur.cnt + 1));
+                    }
                     
-                    if (visited[cur.x2][cur.y2][cur.x2][cur.y2 + d]) continue;
+                    if(!v[cur.x2][cur.y2][0] || !v[cur.x2][cur.y2+d][0]) {
+                        v[cur.x2][cur.y2][0] = true;
+                        v[cur.x2][cur.y2+d][0] = true;
+                        q.offer(new Robot(cur.x2, cur.y2, cur.x2, cur.y2 + d, cur.cnt + 1));
+                    }
                     
-                    visited[cur.x2][cur.y2][cur.x2][cur.y2 + d] = true;
-                    visited[cur.x2][cur.y2 +d][cur.x2][cur.y2] = true;
-                    q.offer(new Robot(cur.x2, cur.y2, cur.x2, cur.y2 + d, cur.cnt + 1));
                 }
             }
         }
@@ -138,6 +143,16 @@ class Solution {
 - : 그렇기 때문에 이번 문제의 경우 다익스트라와 BFS가 동일한 결과값을 전달함.
 - 이번 문제의 경우 두 개의 좌표를 차지하기 때문에 (1,1),(2,1)과 (2,1)(1,1)에 대해서 같은 형태로 도착하는 경우가 있음.
 - : 이 경우에 추가적으로 상대적인 좌표에 대한 방문 체크를 함으로써 불필요한 탐색을 줄일 수 있음.
+
+> 추가
+- 방문 배열을 3차원으로 줄이기 위해 이것저것 시도를 해봄.
+- 우선 한 개의 좌표를 기준으로 수평/수직에 대해서 방문체크를 별도로 진행
+- 한 개의 좌표로도 되는 이유는 (1,1),(2,1)과 (2,1)(1,1)에 대해서 같은 형태라고 보기 떄문
+- 추가로 두 개의 좌표에 대해 한 곳이라도 방문하지 않은 곳이 있다면 큐에 추가.
+- 'ㅡ' 모양만 봤을 때 전체적으로 이동되는 흐름은 4방으로 인접하게 이동되기 때문
+- 위 혹은 아래는 두 좌표 모두 방문하지 않은 곳 || 왼쪽, 오른쪽은 한 칸씩 겹침
+- (0,0)(0,1)과 (0,1)(0,2)와 (0,2)(0,3) 모두를 너비탐색을 통해서 탐색하기 때문에 두 좌표가 겹친다는 것 == 방문했던 적이 있는 곳.
+- 그러므로 두 개의 좌표에 대해 한번에 저장하는 것이 아닌 각각의 좌표를 별도로 방문체크를 진행해도 되는 것.
 
 
 > 구현 알고리즘
