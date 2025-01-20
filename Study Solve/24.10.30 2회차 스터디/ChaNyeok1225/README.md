@@ -104,4 +104,4 @@ class Solution {
 
 #### 풀이 링크
 
-[Private Solve](https://github.com/The-Four-Error-Pickers/Algorithm-Study/tree/main/Private%20Solve/132266.%20%EB%B6%80%EB%8C%80%EB%B3%B5%EA%B7%80/ChaNyeok1225/2024-10-30T212649)
+[Private Solve](https://github.com/The-Four-Error-Pickers/Algorithm-Study/tree/main/Private%20Solve/프로그래머스/132266.%20%EB%B6%80%EB%8C%80%EB%B3%B5%EA%B7%80/ChaNyeok1225/2024-10-30T212649)

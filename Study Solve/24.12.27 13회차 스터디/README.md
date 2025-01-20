@@ -62,4 +62,4 @@
 
 # 풀이 링크
 
-<a href="https://github.com/The-Four-Error-Pickers/Algorithm-Study/tree/main/Private%20Solve/150365.%20%EB%AF%B8%EB%A1%9C%20%ED%83%88%EC%B6%9C%20%EB%AA%85%EB%A0%B9%EC%96%B4">링크</a>
+<a href="https://github.com/The-Four-Error-Pickers/Algorithm-Study/tree/main/Private%20Solve/프로그래머스/150365.%20%EB%AF%B8%EB%A1%9C%20%ED%83%88%EC%B6%9C%20%EB%AA%85%EB%A0%B9%EC%96%B4">링크</a>

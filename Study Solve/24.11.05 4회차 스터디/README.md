@@ -87,4 +87,4 @@
 
 # 풀이 링크
 
-<a href="https://github.com/The-Four-Error-Pickers/Algorithm-Study/tree/main/Private%20Solve/133500.%20%EB%93%B1%EB%8C%80">링크</a>
+<a href="https://github.com/The-Four-Error-Pickers/Algorithm-Study/tree/main/Private%20Solve/프로그래머스/133500.%20%EB%93%B1%EB%8C%80">링크</a>

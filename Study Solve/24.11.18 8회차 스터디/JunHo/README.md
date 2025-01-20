@@ -86,4 +86,4 @@ class Solution {
 
 #### 풀이 링크
 
-[Private Solve](https://github.com/The-Four-Error-Pickers/Algorithm-Study/tree/main/Private%20Solve/77886.%20110%20%EC%98%AE%EA%B8%B0%EA%B8%B0/JunHo/2024-11-18T21738)
+[Private Solve](https://github.com/The-Four-Error-Pickers/Algorithm-Study/tree/main/Private%20Solve/프로그래머스/77886.%20110%20%EC%98%AE%EA%B8%B0%EA%B8%B0/JunHo/2024-11-18T21738)

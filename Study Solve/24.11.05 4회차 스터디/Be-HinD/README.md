@@ -67,5 +67,5 @@ class Solution {
 
 > 풀이 링크
 
-[Private Solve](https://github.com/The-Four-Error-Pickers/Algorithm-Study/tree/main/Private%20Solve/133500.%20%EB%93%B1%EB%8C%80/Be-HinD(Ryo)/2024-11-5T191038)
+[Private Solve](https://github.com/The-Four-Error-Pickers/Algorithm-Study/tree/main/Private%20Solve/프로그래머스/133500.%20%EB%93%B1%EB%8C%80/Be-HinD(Ryo)/2024-11-5T191038)
 

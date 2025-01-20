@@ -98,4 +98,4 @@ class Solution {
 
 > 풀이 링크
 
-[Private Solve](https://github.com/The-Four-Error-Pickers/Algorithm-Study/tree/main/Private%20Solve/81303.%20%ED%91%9C%20%ED%8E%B8%EC%A7%91/Be-HinD(Ryo))
+[Private Solve](https://github.com/The-Four-Error-Pickers/Algorithm-Study/tree/main/Private%20Solve/프로그래머스/81303.%20%ED%91%9C%20%ED%8E%B8%EC%A7%91/Be-HinD(Ryo))
